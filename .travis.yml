@@ -1,0 +1,11 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - cd /production_workflow/frontend
+  - docker build -t vivek/production_workflow -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true vivek/production_workflow npm run test -- --coverage
