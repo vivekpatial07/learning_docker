@@ -9,3 +9,15 @@ before_install:
 
 script:
   - docker run -e CI=true vivek/production_workflow npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "production_worflow_aws"
+  env: "production_worflow_aws_env"
+  bucket_name: "elasticbeanstalk-us-east-1-192837198276"
+  bucket_path: "production_worflow_aws"
+  on:
+    branch: master
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_KEY"
